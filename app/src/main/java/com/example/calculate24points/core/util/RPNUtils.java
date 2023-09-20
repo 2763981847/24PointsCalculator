@@ -56,7 +56,7 @@ public class RPNUtils {
     public static String rpnToInfix(String[] rpn) {
         Deque<String> stack = new ArrayDeque<>();
         for (String s : rpn) {
-            if (Character.isLetterOrDigit(s.charAt(0))) {
+            if (Character.isDigit(s.charAt(0))) {
                 stack.push(s);
             } else {
                 String operand2 = stack.pop();
