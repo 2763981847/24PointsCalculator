@@ -10,7 +10,7 @@ import android.widget.GridView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.calculate24points.adapter.PokerCardAdapter;
-import com.example.calculate24points.bean.PokerCard;
+import com.example.calculate24points.entity.PokerCard;
 import com.example.calculate24points.core.TwentyFourPointsCalculator;
 
 import java.util.ArrayList;

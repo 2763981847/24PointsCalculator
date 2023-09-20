@@ -1,9 +1,6 @@
-package com.example.calculate24points.bean;
-
-import android.graphics.PointF;
+package com.example.calculate24points.entity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class PokerCard {

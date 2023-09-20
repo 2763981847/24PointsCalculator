@@ -8,9 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 import com.example.calculate24points.R;
-import com.example.calculate24points.bean.PokerCard;
+import com.example.calculate24points.entity.PokerCard;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
