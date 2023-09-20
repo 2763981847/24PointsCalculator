@@ -3,6 +3,7 @@ package com.example.calculate24points;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.calculate24points.adapter.PokerCardAdapter;
 import com.example.calculate24points.entity.PokerCard;
 import com.example.calculate24points.core.TwentyFourPointsCalculator;
+import com.example.calculate24points.util.LayoutHeightUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private void setAdapters() {
         allPokerCards = PokerCard.ALL_POKER_CARDS;
         pokerGrid.setAdapter(new PokerCardAdapter(this, allPokerCards));
+        LayoutHeightUtils.setGirdViewHeightBasedOnChildren(pokerGrid);
         selectedPokerList.setAdapter(selectedPokerAdapter);
         selectedPokerList.setEmptyView(findViewById(R.id.empty_view));
     }
