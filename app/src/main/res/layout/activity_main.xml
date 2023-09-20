@@ -43,6 +43,14 @@
                 android:horizontalSpacing="10dp"
                 android:numColumns="4"
                 android:scaleType="centerInside" />
+
+            <TextView
+                android:id="@+id/empty_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="请先选择卡牌"
+                android:textSize="30sp" />
         </LinearLayout>
 
         <LinearLayout

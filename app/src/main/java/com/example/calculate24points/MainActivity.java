@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         allPokerCards = PokerCard.ALL_POKER_CARDS;
         pokerGrid.setAdapter(new PokerCardAdapter(this, allPokerCards));
         selectedPokerList.setAdapter(selectedPokerAdapter);
+        selectedPokerList.setEmptyView(findViewById(R.id.empty_view));
     }
 
     private void findViews() {

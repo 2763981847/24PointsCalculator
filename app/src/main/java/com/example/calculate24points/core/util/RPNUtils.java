@@ -4,6 +4,7 @@ import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.Stack;
 
 public class RPNUtils {
     public static String[] generateDefaultRPN(String[] numbers, String[] operators) {
@@ -54,19 +55,17 @@ public class RPNUtils {
 
     public static String rpnToInfix(String[] rpn) {
         Deque<String> stack = new ArrayDeque<>();
-        Arrays.stream(rpn)
-                .map(s -> s.charAt(0))
-                .forEach(c -> {
-                    if (Character.isDigit(c)) {
-                        stack.push(String.valueOf(c));
-                    } else {
-                        String operand2 = stack.pop();
-                        String operand1 = stack.pop();
-                        String result = "(" + operand1 + c + operand2 + ")";
-                        stack.push(result);
-                    }
-                });
-        String infixExpression = stack.pop();
-        return infixExpression.substring(1, infixExpression.length() - 1);
+        for (String s : rpn) {
+            if (Character.isLetterOrDigit(s.charAt(0))) {
+                stack.push(s);
+            } else {
+                String operand2 = stack.pop();
+                String operand1 = stack.pop();
+                String result = "(" + operand1 + s + operand2 + ")";
+                stack.push(result);
+            }
+        }
+
+        return stack.pop();
     }
 }
