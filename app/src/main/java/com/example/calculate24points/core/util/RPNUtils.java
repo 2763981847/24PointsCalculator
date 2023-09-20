@@ -45,7 +45,7 @@ public class RPNUtils {
             } else if (s.equals("*")) {
                 stack.push(num1 * num2);
             } else {
-                if (num1 % num2 != 0) return false;
+                if (num2 == 0 || num1 % num2 != 0) return false;
                 stack.push(num1 / num2);
             }
         }

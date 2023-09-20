@@ -18,6 +18,22 @@ public class PokerCardAdapter extends BaseAdapter {
     private Context context;
     private List<PokerCard> pokerCards;
 
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
+    public List<PokerCard> getPokerCards() {
+        return pokerCards;
+    }
+
+    public void setPokerCards(List<PokerCard> pokerCards) {
+        this.pokerCards = pokerCards;
+    }
+
     public PokerCardAdapter(Context context, List<PokerCard> pokerCards) {
         this.context = context;
         this.pokerCards = pokerCards;

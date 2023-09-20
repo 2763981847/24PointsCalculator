@@ -1,16 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:layout_height="wrap_content">
 
-    <GridView
-        android:id="@+id/poker_grid"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:numColumns="4" />
+        android:orientation="vertical"
+        tools:context=".MainActivity">
 
-</LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="请点击选择卡牌"
+            android:textSize="30sp" />
+
+        <GridView
+            android:id="@+id/poker_grid"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:horizontalSpacing="10dp"
+            android:numColumns="4"
+            android:scaleType="centerInside"
+            android:verticalSpacing="-90dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="已选择卡牌"
+            android:textSize="30sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <GridView
+                android:id="@+id/selected_poker_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:horizontalSpacing="10dp"
+                android:numColumns="4"
+                android:scaleType="centerInside" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/button_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/clear_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="清空选择" />
+
+            <Button
+                android:id="@+id/calculate_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:enabled="false"
+                android:text="计算结果" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

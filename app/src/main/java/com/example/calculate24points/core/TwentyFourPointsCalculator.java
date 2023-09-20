@@ -21,7 +21,7 @@ public class TwentyFourPointsCalculator {
 
     public static List<String> calculate(String[] numbers) {
         List<String[]> numberPermutations = PermutationsUtils.permuteUnique(numbers);
-        return numberPermutations.parallelStream()
+        List<String> results = numberPermutations.stream()
                 .flatMap(numberPermutation ->
                         OPERATOR_PERMUTATIONS
                                 .stream()
@@ -30,6 +30,7 @@ public class TwentyFourPointsCalculator {
                 .filter(RPNUtils::checkRPN)
                 .map(RPNUtils::rpnToInfix)
                 .collect(Collectors.toList());
+        return results;
     }
 
 }
