@@ -3,17 +3,17 @@ package com.example.calculate24points;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.calculate24points.adapter.PokerCardAdapter;
-import com.example.calculate24points.entity.PokerCard;
 import com.example.calculate24points.core.TwentyFourPointsCalculator;
-import com.example.calculate24points.util.LayoutHeightUtils;
+import com.example.calculate24points.entity.PokerCard;
+import com.example.calculate24points.util.ViewHeightUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,10 +37,10 @@ public class MainActivity extends AppCompatActivity {
     private void initView() {
         findViews();
         setAdapters();
-        setClickListeners();
+        setListeners();
     }
 
-    private void setClickListeners() {
+    private void setListeners() {
         pokerGrid.setOnItemClickListener(this::select);
         selectedPokerList.setOnItemClickListener(this::cancel);
         clearButton.setOnClickListener(this::clearSelect);
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private void setAdapters() {
         allPokerCards = PokerCard.ALL_POKER_CARDS;
         pokerGrid.setAdapter(new PokerCardAdapter(this, allPokerCards));
-        LayoutHeightUtils.setGirdViewHeightBasedOnChildren(pokerGrid);
+        ViewHeightUtils.setGirdViewHeightBasedOnChildren(pokerGrid);
         selectedPokerList.setAdapter(selectedPokerAdapter);
         selectedPokerList.setEmptyView(findViewById(R.id.empty_view));
     }
@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         PokerCard pokerCard = allPokerCards.get(position);
         List<PokerCard> selectedPokerCards = selectedPokerAdapter.getPokerCards();
         if (selectedPokerCards.size() >= 4) {
+            Toast.makeText(this, "已选择四张卡牌", Toast.LENGTH_SHORT).show();
             return;
         }
         selectedPokerCards.add(pokerCard);

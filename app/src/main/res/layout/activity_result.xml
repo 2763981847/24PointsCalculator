@@ -24,6 +24,13 @@
             android:layout_marginTop="20dp" />
 
         <TextView
+            android:id="@+id/result_size"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:alpha="0.8" />
+
+        <TextView
             android:id="@+id/empty_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
