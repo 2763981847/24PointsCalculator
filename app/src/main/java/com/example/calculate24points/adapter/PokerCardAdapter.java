@@ -19,8 +19,10 @@ import java.util.Locale;
 
 public class PokerCardAdapter extends BaseAdapter {
 
-    private final Context context; // 上下文对象
-    private final List<PokerCard> pokerCards; // 存储扑克牌数据的列表
+    // 上下文对象
+    private final Context context;
+    // 存储扑克牌数据的列表
+    private final List<PokerCard> pokerCards;
 
     /**
      * 获取扑克牌数据列表
@@ -31,6 +33,7 @@ public class PokerCardAdapter extends BaseAdapter {
 
     /**
      * 构造函数，初始化适配器
+     *
      * @param context
      * @param pokerCards
      */
@@ -41,17 +44,20 @@ public class PokerCardAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return pokerCards.size(); // 获取扑克牌列表的大小
+        // 获取扑克牌列表的大小
+        return pokerCards.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return pokerCards.get(position); // 获取指定位置的扑克牌对象
+        // 获取指定位置的扑克牌对象
+        return pokerCards.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return position; // 获取指定位置的扑克牌对象的ID
+        // 获取指定位置的扑克牌对象的ID
+        return position;
     }
 
     @Override
@@ -61,16 +67,24 @@ public class PokerCardAdapter extends BaseAdapter {
             // 如果convertView为空，表示需要创建一个新的列表项视图
             convertView = LayoutInflater.from(context).inflate(R.layout.poker_image, null);
             viewHolder = new ViewHolder();
-            viewHolder.imageView = convertView.findViewById(R.id.poker_image); // 查找ImageView组件
-            convertView.setTag(viewHolder); // 将ViewHolder对象存储在视图中，以便后续重用
+            // 查找ImageView组件
+            viewHolder.imageView = convertView.findViewById(R.id.poker_image);
+            // 将ViewHolder对象存储在视图中，以便后续重用
+            convertView.setTag(viewHolder);
         } else {
-            viewHolder = (ViewHolder) convertView.getTag(); // 如果convertView不为空，直接从视图中获取ViewHolder对象
+            // 如果convertView不为空，直接从视图中获取ViewHolder对象
+            viewHolder = (ViewHolder) convertView.getTag();
         }
-        PokerCard pokerCard = pokerCards.get(position); // 获取当前位置的扑克牌对象
-        String name = pokerCard.getSuit().name().toLowerCase(Locale.ROOT) + pokerCard.getNumber(); // 根据花色和数字构建扑克牌图片资源的名称
-        int resId = convertView.getResources().getIdentifier(name, "drawable", context.getPackageName()); // 获取对应资源的ID
-        viewHolder.imageView.setImageResource(resId); // 设置ImageView的图片资源
-        return convertView; // 返回填充数据后的列表项视图
+        // 获取当前位置的扑克牌对象
+        PokerCard pokerCard = pokerCards.get(position);
+        // 根据花色和数字构建扑克牌图片资源的名称
+        String name = pokerCard.getSuit().name().toLowerCase(Locale.ROOT) + pokerCard.getNumber();
+        // 获取对应资源的ID
+        int resId = convertView.getResources().getIdentifier(name, "drawable", context.getPackageName());
+        // 设置ImageView的图片资源
+        viewHolder.imageView.setImageResource(resId);
+        // 返回填充数据后的列表项视图
+        return convertView;
     }
 
     /**

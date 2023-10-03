@@ -103,10 +103,14 @@ public class MainActivity extends AppCompatActivity {
      * @param id
      */
     private void cancel(AdapterView<?> parent, View view, int position, long id) {
-        List<PokerCard> selectedPokerCards = selectedPokerAdapter.getPokerCards(); // 获取已选扑克牌列表
-        selectedPokerCards.remove(position); // 移除选定位置的扑克牌
-        selectedPokerAdapter.notifyDataSetChanged(); // 通知适配器数据已更改
-        calculateButton.setEnabled(false); // 禁用计算按钮
+        // 获取已选扑克牌列表
+        List<PokerCard> selectedPokerCards = selectedPokerAdapter.getPokerCards();
+        // 移除选定位置的扑克牌
+        selectedPokerCards.remove(position);
+        // 通知适配器数据已更改
+        selectedPokerAdapter.notifyDataSetChanged();
+        // 禁用计算按钮
+        calculateButton.setEnabled(false);
     }
 
     /**
@@ -118,25 +122,36 @@ public class MainActivity extends AppCompatActivity {
      * @param id
      */
     public void select(AdapterView<?> parent, View view, int position, long id) {
-        List<PokerCard> selectedPokerCards = selectedPokerAdapter.getPokerCards(); // 获取已选扑克牌列表
-        if (selectedPokerCards.size() >= 4) { // 如果已选择了四张卡牌
+        // 获取已选扑克牌列表
+        List<PokerCard> selectedPokerCards = selectedPokerAdapter.getPokerCards();
+        // 如果已选择了四张卡牌
+        if (selectedPokerCards.size() >= 4) {
             Toast toast = Toast.makeText(this, "已选择四张卡牌", Toast.LENGTH_SHORT);
-            toast.show(); // 显示提示消息
-            return; // 返回，不再添加扑克牌
+            // 显示提示消息
+            toast.show();
+            // 返回，不再添加扑克牌
+            return;
         }
-        PokerCard pokerCard = ALL_POKER_CARDS.get(position); // 获取选中的扑克牌
-        selectedPokerCards.add(pokerCard); // 添加选中的扑克牌到已选列表
-        selectedPokerAdapter.notifyDataSetChanged(); // 通知适配器数据已更改
-        calculateButton.setEnabled(selectedPokerCards.size() == 4); // 如果已选扑克牌数为4，启用计算按钮
+        // 获取选中的扑克牌
+        PokerCard pokerCard = ALL_POKER_CARDS.get(position);
+        // 添加选中的扑克牌到已选列表
+        selectedPokerCards.add(pokerCard);
+        // 通知适配器数据已更改
+        selectedPokerAdapter.notifyDataSetChanged();
+        // 如果已选扑克牌数为4，启用计算按钮
+        calculateButton.setEnabled(selectedPokerCards.size() == 4);
     }
 
     /**
      * 清空已选扑克牌列表
      */
     private void clearSelect() {
-        selectedPokerAdapter.getPokerCards().clear(); // 清空已选扑克牌列表
-        calculateButton.setEnabled(false); // 禁用计算按钮
-        selectedPokerAdapter.notifyDataSetChanged(); // 通知适配器数据已更改
+        // 清空已选扑克牌列表
+        selectedPokerAdapter.getPokerCards().clear();
+        // 禁用计算按钮
+        calculateButton.setEnabled(false);
+        // 通知适配器数据已更改
+        selectedPokerAdapter.notifyDataSetChanged();
     }
 
     /**
@@ -146,13 +161,21 @@ public class MainActivity extends AppCompatActivity {
         String[] numbers = selectedPokerAdapter.getPokerCards()
                 .stream()
                 .map(pokerCard -> String.valueOf(pokerCard.getNumber()))
-                .toArray(String[]::new); // 获取已选扑克牌的数字并转换为字符串数组
-        List<String> results = TwentyFourPointsCalculator.calculate(numbers); // 借助TwentyFourPointsCalculator计算结果
-        Intent intent = new Intent(this, ResultActivity.class); // 创建Intent，跳转到ResultActivity
-        Bundle bundle = new Bundle(); // 创建Bundle来传递数据
-        bundle.putStringArrayList("results", (ArrayList<String>) results); // 将结果列表放入Bundle中
-        intent.putExtras(bundle); // 将Bundle添加到Intent中
-        startActivity(intent); // 启动ResultActivity
-        clearSelect(); // 清空已选扑克牌列表
+                // 获取已选扑克牌的数字并转换为字符串数组
+                .toArray(String[]::new);
+        // 借助TwentyFourPointsCalculator计算结果
+        List<String> results = TwentyFourPointsCalculator.calculate(numbers);
+        // 创建Intent，跳转到ResultActivity
+        Intent intent = new Intent(this, ResultActivity.class);
+        // 创建Bundle来传递数据
+        Bundle bundle = new Bundle();
+        // 将结果列表放入Bundle中
+        bundle.putStringArrayList("results", (ArrayList<String>) results);
+        // 将Bundle添加到Intent中
+        intent.putExtras(bundle);
+        // 启动ResultActivity
+        startActivity(intent);
+        // 清空已选扑克牌列表
+        clearSelect();
     }
 }

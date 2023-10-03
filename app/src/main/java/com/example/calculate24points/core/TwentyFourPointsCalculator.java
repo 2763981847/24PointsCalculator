@@ -12,8 +12,10 @@ import java.util.stream.Collectors;
  */
 public class TwentyFourPointsCalculator {
 
-    private static final String[] OPERATORS = new String[]{"+", "-", "*", "/"}; // 可用的运算符数组
-    private static final List<String[]> OPERATOR_PERMUTATIONS; // 运算符所有排列可能
+    // 可用的运算符数组
+    private static final String[] OPERATORS = new String[]{"+", "-", "*", "/"};
+    // 运算符所有排列可能
+    private static final List<String[]> OPERATOR_PERMUTATIONS;
 
     // 初始化运算符的所有排列
     static {
@@ -22,7 +24,8 @@ public class TwentyFourPointsCalculator {
         for (int i = 0; i < OPERATORS.length; i++) {
             temp[i] = temp[i + OPERATORS.length] = temp[i + 2 * OPERATORS.length] = OPERATORS[i];
         }
-        OPERATOR_PERMUTATIONS = PermutationsUtils.permuteUnique(temp, 3); // 生成运算符的所有排列
+        // 生成运算符的所有排列
+        OPERATOR_PERMUTATIONS = PermutationsUtils.permuteUnique(temp, 3);
     }
 
     /**
@@ -32,17 +35,21 @@ public class TwentyFourPointsCalculator {
      * @return
      */
     public static List<String> calculate(String[] numbers) {
-        List<String[]> numberPermutations = PermutationsUtils.permuteUnique(numbers); // 生成数字的所有全排列
+        // 生成数字的所有全排列
+        List<String[]> numberPermutations = PermutationsUtils.permuteUnique(numbers);
         // 使用并行流处理，加快运算速度
         return numberPermutations.parallelStream()
+                // 生成所有可能的逆波兰表达式并合并为一个流
                 .flatMap(numberPermutation ->
                         OPERATOR_PERMUTATIONS
                                 .stream()
                                 // 组合数字的某种排列和操作符的某种排列，生成逆波兰表达式
                                 .flatMap(operatorPermutation -> Arrays.stream(RPNUtils.generateRPNs(numberPermutation, operatorPermutation)))
-                ) // 生成所有可能的逆波兰表达式并合并为一个流
-                .filter(RPNUtils::checkRPN) // 过滤出等于24的逆波兰表达式
-                .map(RPNUtils::rpnToInfix) // 将逆波兰表达式转换为中缀表达式，便于展示结果
+                )
+                // 过滤出等于24的逆波兰表达式
+                .filter(RPNUtils::checkRPN)
+                // 将逆波兰表达式转换为中缀表达式，便于展示结果
+                .map(RPNUtils::rpnToInfix)
                 .collect(Collectors.toList());
     }
 }

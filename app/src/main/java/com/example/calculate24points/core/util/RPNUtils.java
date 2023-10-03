@@ -33,6 +33,7 @@ public class RPNUtils {
 
     /**
      * 检查逆波兰表达式结果是否等于24
+     *
      * @param rpn 逆波兰表达式
      * @return
      */
@@ -40,27 +41,38 @@ public class RPNUtils {
         Deque<Integer> stack = new LinkedList<>();
         for (String s : rpn) {
             if (Character.isDigit(s.charAt(0))) {
-                stack.push(Integer.valueOf(s)); // 如果是数字，将其压入栈
+                // 如果是数字，将其压入栈
+                stack.push(Integer.valueOf(s));
                 continue;
             }
-            int num2 = stack.pop(); // 弹出栈顶元素作为第二个操作数
-            int num1 = stack.pop(); // 弹出栈顶元素作为第一个操作数
+            // 如果是操作符，进行一次计算
+            // 弹出栈顶元素作为第二个操作数
+            int num2 = stack.pop();
+            // 弹出栈顶元素作为第一个操作数
+            int num1 = stack.pop();
             if (s.equals("+")) {
-                stack.push(num1 + num2); // 执行加法并将结果压入栈
+                // 执行加法并将结果压入栈
+                stack.push(num1 + num2);
             } else if (s.equals("-")) {
-                stack.push(num1 - num2); // 执行减法并将结果压入栈
+                // 执行减法并将结果压入栈
+                stack.push(num1 - num2);
             } else if (s.equals("*")) {
-                stack.push(num1 * num2); // 执行乘法并将结果压入栈
+                // 执行乘法并将结果压入栈
+                stack.push(num1 * num2);
             } else {
-                if (num2 == 0 || num1 % num2 != 0) return false; // 避免除法中的除零错误
-                stack.push(num1 / num2); // 执行除法并将结果压入栈
+                // 避免除法中的除零错误
+                if (num2 == 0 || num1 % num2 != 0) return false;
+                // 执行除法并将结果压入栈
+                stack.push(num1 / num2);
             }
         }
-        return stack.pop() == 24; // 最终栈中的值应为24
+        // 判断结果是否为24
+        return stack.pop() == 24;
     }
 
     /**
      * 将逆波兰表达式转换为中缀表达式
+     *
      * @param rpn 逆波兰表达式
      * @return 中缀表达式
      */
@@ -68,15 +80,22 @@ public class RPNUtils {
         Deque<String> stack = new ArrayDeque<>();
         for (String s : rpn) {
             if (Character.isDigit(s.charAt(0))) {
-                stack.push(s); // 如果是数字，将其压入栈
+                // 如果是数字，将其压入栈
+                stack.push(s);
             } else {
-                String operand2 = stack.pop(); // 弹出栈顶元素作为第二个操作数
-                String operand1 = stack.pop(); // 弹出栈顶元素作为第一个操作数
-                String result = "(" + operand1 + s + operand2 + ")"; // 构建中缀表达式
-                stack.push(result); // 将中缀表达式压入栈
+                // 弹出栈顶元素作为第二个操作数
+                String operand2 = stack.pop();
+                // 弹出栈顶元素作为第一个操作数
+                String operand1 = stack.pop();
+                // 构建中缀表达式
+                String result = "(" + operand1 + s + operand2 + ")";
+                // 将中缀表达式压入栈
+                stack.push(result);
             }
         }
-        String infixExp = stack.pop(); // 最后的栈顶元素即为中缀表达式
-        return infixExp.substring(1, infixExp.length() - 1); // 去除多余的括号
+        // 最后的栈顶元素即为中缀表达式
+        String infixExp = stack.pop();
+        // 去除多余的括号并返回
+        return infixExp.substring(1, infixExp.length() - 1);
     }
 }
