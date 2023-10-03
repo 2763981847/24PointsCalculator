@@ -60,7 +60,7 @@ public class RPNUtils {
                 // 执行乘法并将结果压入栈
                 stack.push(num1 * num2);
             } else {
-                // 避免除法中的除零错误
+                // 无法整除或者除数为0直接返回false
                 if (num2 == 0 || num1 % num2 != 0) return false;
                 // 执行除法并将结果压入栈
                 stack.push(num1 / num2);
